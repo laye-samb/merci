@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculatrice</title>
+</head>
+<body>
+
+<h2>Calculatrice</h2>
+
+<form id="calculatorForm">
+  <label for="num1">Nombre 1:</label>
+  <input type="text" id="num1" name="num1" required pattern="[0-9]+"><br><br>
+
+  <label for="num2">Nombre 2:</label>
+  <input type="text" id="num2" name="num2" required pattern="[0-9]+" oninput="checkDivision()"><br><br>
+
+  <button type="button" onclick="calculate()">Calculer</button>
+</form>
+
+<p>Résultats:</p>
+<div id="results"></div>
+
+<script>
+function calculate() {
+  var num1 = parseFloat(document.getElementById('num1').value);
+  var num2 = parseFloat(document.getElementById('num2').value);
+  
+  if (isNaN(num1) || isNaN(num2)) {
+    alert("Veuillez saisir des nombres valides.");
+    return;
+  }
+  
+  var sum = num1 + num2;
+  var product = num1 * num2;
+  var division = num2 !== 0 ? num1 / num2 : "Division par zéro";
+  var subtraction = num1 - num2;
+  
+  document.getElementById('results').innerHTML = "Somme: " + sum + "<br>" +
+                                                 "Multiplication: " + product + "<br>" +
+                                                 "Division: " + division + "<br>" +
+                                                 "Soustraction: " + subtraction;
+}
+
+function checkDivision() {
+  var num2 = parseFloat(document.getElementById('num2').value);
+  if (num2 === 0) {
+    alert("La division par zéro n'est pas autorisée.");
+    document.getElementById('num2').value = '';
+  }
+}
+</script>
+
+</body>
+</html>
